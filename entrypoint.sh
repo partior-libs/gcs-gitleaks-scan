@@ -14,13 +14,21 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
-  echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact $CONFIG
-  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact $CONFIG)
+  echo gitleaks detect --path=$GITHUB_WORKSPACE --verbose --redact $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks detect --path=$GITHUB_WORKSPACE --verbose --redact $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit_list.txt
-  echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG
-  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG)
+  for eachCommit in $(cat commit-list.txt)
+  do
+    if [[ ! -z $commit_range ]];then
+      commit_range=$eachCommit..$commit_range
+    else
+      commit_range=$eachCommit
+    fi 
+  done
+  echo gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --log-opts="--all ${commit_range}" $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact --log-opts="--all ${commit_range}" $CONFIG)
 fi
 
 if [ $? -eq 1 ]
