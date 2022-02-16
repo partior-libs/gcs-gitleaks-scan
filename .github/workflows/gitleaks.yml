@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: gitleaks-action with defaults
-        uses: partior-actions/gitleaks-action@main
+        uses: partior-libs/gitleaks-action@main
       - name: gitleaks-action with config
-        uses: partior-actions/gitleaks-action@main
+        uses: partior-libs/gitleaks-action@main
         with:
           config-path: .gitleaks.yml
