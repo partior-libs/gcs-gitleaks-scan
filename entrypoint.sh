@@ -19,6 +19,7 @@ then
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   echo [INFO] Listing all branches...
+  git fetch --all
   git branch --all
   echo [INFO] Getting commits...
   COMMIT_LIST=$(git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF...)
