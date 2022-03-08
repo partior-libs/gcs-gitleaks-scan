@@ -18,8 +18,8 @@ then
   CAPTURE_OUTPUT=$(gitleaks detect --source=$GITHUB_WORKSPACE --verbose --redact $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
-  git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit-list.txt
-  for eachCommit in $(cat commit-list.txt)
+  git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > $GITHUB_WORKSPACE/commit-list.txt
+  for eachCommit in $(cat $GITHUB_WORKSPACE/commit-list.txt)
   do
     if [[ ! -z $commit_range ]];then
       commit_range=$eachCommit..$commit_range
