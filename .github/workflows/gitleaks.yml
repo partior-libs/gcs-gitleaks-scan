@@ -6,10 +6,10 @@ jobs:
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: gitleaks-action with defaults
-        uses: partior-libs/gitleaks-action@main
+        uses: partior-libs/gcs-gitleaks-action@main
       - name: gitleaks-action with config
-        uses: partior-libs/gitleaks-action@main
+        uses: partior-libs/gcs-gitleaks-action@main
         with:
           config-path: .gitleaks.yml
