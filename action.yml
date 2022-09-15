@@ -25,7 +25,7 @@ runs:
         docker pull ghcr.io/zricethezav/gitleaks:${{ inputs.gitleaks-version }}
 
         ${{ github.action_path }}/scripts/start-scan.sh "${{ inputs.config-path }}" \
-          "{{ inputs.gitleaks-version }}"
+          "${{ inputs.gitleaks-version }}"
       shell: bash
   # using: "docker"
   # image: "Dockerfile"
