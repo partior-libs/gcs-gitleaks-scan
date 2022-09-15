@@ -27,7 +27,7 @@ echo [DEBUG] Git config...
 # ls -ltrah /github/home/.gitconfig
 # ls -ltrah /github/home/
 # git config --global --add safe.directory /github/workspace
-# git version
+git version
 git config --get-all safe.directory
 cd $baseDir
 echo [DEBUG] Git config... end
