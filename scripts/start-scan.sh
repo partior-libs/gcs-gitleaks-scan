@@ -39,6 +39,7 @@ then
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   echo [INFO] Getting commits...
+  echo git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick  remotes/origin/$GITHUB_BASE_REF..HEAD
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick  remotes/origin/$GITHUB_BASE_REF..HEAD
   COMMIT_LIST=$(git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF..HEAD)
   for eachCommit in $COMMIT_LIST
