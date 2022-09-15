@@ -27,7 +27,3 @@ runs:
         ${{ github.action_path }}/scripts/start-scan.sh "${{ inputs.config-path }}" \
           "${{ inputs.gitleaks-version }}"
       shell: bash
-  # using: "docker"
-  # image: "Dockerfile"
-  # args:
-  #   - ${{ inputs.config-path }}
