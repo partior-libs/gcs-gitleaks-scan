@@ -14,6 +14,8 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 echo [DEBUG] Listing...
 ls -ltrah $GITHUB_WORKSPACE
 echo [DEBUG] Git config...
+ls -ltrah /github/home/.gitconfig
+ls -ltrah /github/home/
 git config --global --add safe.directory /github/workspace
 git version
 git config --global --get-all safe.directory
