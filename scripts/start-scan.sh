@@ -42,10 +42,10 @@ then
   echo git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick  remotes/origin/$GITHUB_BASE_REF..HEAD
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick  remotes/origin/$GITHUB_BASE_REF..HEAD
   COMMIT_LIST=$(git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF..HEAD)
+  lastCommit=""
   for eachCommit in $COMMIT_LIST
   do
     echo [INFO] Checking commit $eachCommit
-    lastCommit=""
     if [[ ! -z $commit_range ]];then
       commit_range=$eachCommit..$lastCommit
     else
