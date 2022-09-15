@@ -45,14 +45,16 @@ then
   for eachCommit in $COMMIT_LIST
   do
     echo [INFO] Checking commit $eachCommit
+    lastCommit=""
     if [[ ! -z $commit_range ]];then
-      commit_range=$eachCommit..$commit_range
+      commit_range=$eachCommit..$lastCommit
     else
       commit_range=$eachCommit
+      lastCommit=$eachCommit
     fi 
   done
-  echo docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="--all ${commit_range}" $CONFIG
-  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="--all ${commit_range}" $CONFIG)
+  echo docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG
+  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG)
 fi
 
 if [ $? -eq 1 ]
