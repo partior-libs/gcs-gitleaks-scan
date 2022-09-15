@@ -14,6 +14,8 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 echo [DEBUG] Listing...
 baseDir=$(pwd)
 cd $GITHUB_WORKSPACE
+pwd
+ls -ltrah ./
 git config --add safe.directory $GITHUB_WORKSPACE
 # ls -ltrah $GITHUB_WORKSPACE
 echo [DEBUG] Git config...
