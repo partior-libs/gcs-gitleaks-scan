@@ -16,6 +16,7 @@ baseDir=$(pwd)
 cd $GITHUB_WORKSPACE
 pwd
 ls -ltrah ./
+echo [DEBUG] Add safe..
 git config --add safe.directory $GITHUB_WORKSPACE
 # ls -ltrah $GITHUB_WORKSPACE
 echo [DEBUG] Git config...
