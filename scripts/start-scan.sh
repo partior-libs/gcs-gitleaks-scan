@@ -6,10 +6,10 @@ CONFIG=""
 
 # check if a custom config have been provided
 if [ -f "$GITHUB_WORKSPACE/$INPUT_CONFIG_PATH" ]; then
-  CONFIG=" --config-path=$GITHUB_WORKSPACE/$INPUT_CONFIG_PATH"
+  CONFIG=" --config-path=/path/$INPUT_CONFIG_PATH"
 fi
 
-echo running gitleaks "$(gitleaks version) with the following command👇"
+echo running gitleaks "$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION version) with the following command👇"
 
 DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring me or donating a little something\n\e[36mhttps://github.com/sponsors/zricethezav\n\e[36mhttps://www.paypal.me/zricethezav\n"
 # echo [DEBUG] Listing...
