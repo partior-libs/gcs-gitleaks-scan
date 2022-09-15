@@ -8,13 +8,26 @@ inputs:
     description: 'Path to config (relative to $GITHUB_WORKSPACE)'
     required: false
     default: '.github/.gitleaks.toml'
+  gitleaks-version:
+    description: 'Version to be used for scan'
+    required: false
+    default: 'v8.12.0'
 outputs:
   result: # id of output
     description: 'Gitleaks log output'
   exitcode: # id of output
     description: 'Success for failure value from scan'
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.config-path }}
+  using: "composite"
+  steps:
+    - name: Start scanning
+      run: |
+        docker pull ghcr.io/zricethezav/gitleaks:${{ inputs.gitleaks-version }}
+
+        ${{ github.action_path }}/scripts/start-scan.sh "${{ inputs.config-path }}" \
+          "{{ inputs.gitleaks-version }}"
+      shell: bash
+  # using: "docker"
+  # image: "Dockerfile"
+  # args:
+  #   - ${{ inputs.config-path }}
