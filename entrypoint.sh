@@ -18,6 +18,8 @@ pwd
 ls -ltrah ./
 pwd
 ls -ltrah ./
+echo [DEBUG] git status..
+git status
 echo [DEBUG] Add safe..
 git config --add safe.directory $GITHUB_WORKSPACE
 # ls -ltrah $GITHUB_WORKSPACE
