@@ -14,6 +14,7 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 echo [DEBUG] Listing...
 ls -ltrah $GITHUB_WORKSPACE
 echo [DEBUG] Git config...
+git version
 git config --global --get-all safe.directory
 echo [DEBUG] Git config... end
 if [ "$GITHUB_EVENT_NAME" = "push" ]
