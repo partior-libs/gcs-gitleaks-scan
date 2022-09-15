@@ -7,10 +7,7 @@ LABEL "com.github.actions.color"="purple"
 LABEL "repository"="https://github.com/zricethezav/gitleaks-action"
 
 USER root
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.13/main" >> /etc/apk/repositories
-RUN apk update && apk add git=2.30.5-r0
 
-USER gitleaks
 RUN git config --global --add safe.directory '*'
 
 ADD entrypoint.sh /entrypoint.sh
