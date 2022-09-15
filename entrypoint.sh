@@ -11,6 +11,8 @@ fi
 echo running gitleaks "$(gitleaks version) with the following command👇"
 
 DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring me or donating a little something\n\e[36mhttps://github.com/sponsors/zricethezav\n\e[36mhttps://www.paypal.me/zricethezav\n"
+echo [DEBUG] Listing...
+ls -ltrah $GITHUB_WORKSPACE
 
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
