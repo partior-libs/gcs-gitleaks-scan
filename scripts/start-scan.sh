@@ -9,7 +9,7 @@ if [ -f "$GITHUB_WORKSPACE/$INPUT_CONFIG_PATH" ]; then
   CONFIG=" --config-path=/path/$INPUT_CONFIG_PATH"
 fi
 
-echo running gitleaks "$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION version) with the following command👇"
+echo running gitleaks "$(docker run -v $GITHUB_WORKSPACE:/path ghcr.io/gitleaks/gitleaks:$GITLEAKS_VERSION version) with the following command👇"
 
 DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring me or donating a little something\n\e[36mhttps://github.com/sponsors/zricethezav\n\e[36mhttps://www.paypal.me/zricethezav\n"
 # echo [DEBUG] Listing...
@@ -34,8 +34,8 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 # echo [DEBUG] Git config... end
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
-  echo docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect --source=/path --verbose --redact $CONFIG
-  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect --source=/path --verbose --redact $CONFIG)
+  echo docker run -v $GITHUB_WORKSPACE:/path ghcr.io/gitleaks/gitleaks:$GITLEAKS_VERSION detect --source=/path --verbose --redact $CONFIG
+  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path ghcr.io/gitleaks/gitleaks:$GITLEAKS_VERSION detect --source=/path --verbose --redact $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   echo [INFO] Getting commits...
@@ -53,8 +53,8 @@ then
       lastCommit=$eachCommit
     fi 
   done
-  echo docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG
-  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path zricethezav/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG)
+  echo docker run -v $GITHUB_WORKSPACE:/path ghcr.io/gitleaks/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG
+  CAPTURE_OUTPUT=$(docker run -v $GITHUB_WORKSPACE:/path ghcr.io/gitleaks/gitleaks:$GITLEAKS_VERSION detect  --source=/path --verbose --redact --log-opts="${commit_range}" $CONFIG)
 fi
 
 if [ $? -eq 1 ]
